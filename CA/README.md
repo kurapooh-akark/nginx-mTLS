@@ -34,6 +34,7 @@ OpenSSL を使用して、ルート CA、中間 CA、サーバ証明書、クラ
 |                    | 秘密鍵               | server.key           |                      | gen_server_crt.bat                       |
 |                    | 証明書署名要求       | server.csr           |                      | gen_server_crt.bat                       |
 |                    | 証明書               |                      | server.crt           | gen_server_crt.bat                       |
+|                    | 証明書チェーン       |                      | server_chain.crt     | gen_server_crt.bat                       |
 | クライアント証明書 |                      |                      |                      |                                          |
 |                    | 秘密鍵               | client.key           |                      | gen_client_crt.bat                       |
 |                    | 証明書署名要求       | client.csr           |                      | gen_client_crt.bat                       |
