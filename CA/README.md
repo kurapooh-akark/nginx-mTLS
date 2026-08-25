@@ -1,0 +1,108 @@
+- [認証局（CA）と証明書の作成](#認証局caと証明書の作成)
+    - [出力ファイル](#出力ファイル)
+- [環境設定](#環境設定)
+    - [OpenSSL のパス](#openssl-のパス)
+- [個別設定](#個別設定)
+    - [設定場所](#設定場所)
+    - [サブジェクト](#サブジェクト)
+    - [暗号アルゴリズム、鍵長](#暗号アルゴリズム鍵長)
+    - [有効期限](#有効期限)
+    - [パスワード](#パスワード)
+
+
+認証局（CA）と証明書の作成
+========================================
+
+OpenSSL を使用して、ルート CA、中間 CA、サーバ証明書、クライアント証明書を作成します。
+
+
+### 出力ファイル
+
+| 項目               |                      | keys_secret フォルダ | keys_public フォルダ | 作成箇所                                 |
+| ------------------ | :------------------- | :------------------- | :------------------- | ---------------------------------------- |
+| ルート CA          |                      |                      |                      |                                          |
+|                    | 秘密鍵               | root_ca.key          |                      | gen_ca.bat (ルート CA 作成処理)          |
+|                    | 証明書               |                      | root_ca.crt          | gen_ca.bat (ルート CA 作成処理)          |
+|                    | 発行済みシリアル番号 |                      | root_ca.srl          | gen_ca.bat (中間CA作成処理)              |
+| 中間 CA            |                      |                      |                      |                                          |
+|                    | 秘密鍵               | intermediate_ca.key  |                      | gen_ca.bat (中間CA作成処理)              |
+|                    | 証明書署名要求       | intermediate_ca.csr  |                      | gen_ca.bat (中間CA作成処理)              |
+|                    | 証明書               |                      | intermediate_ca.crt  | gen_ca.bat (中間CA作成処理)              |
+|                    | CA チェーン          |                      | ca_chain.crt         | gen_ca.bat (中間CA作成処理)              |
+|                    | 発行済みシリアル番号 |                      | intermediate_ca.srl  | gen_server_crt.bat<br>gen_client_crt.bat |
+| サーバ証明書       |                      |                      |                      |                                          |
+|                    | 秘密鍵               | server.key           |                      | gen_server_crt.bat                       |
+|                    | 証明書署名要求       | server.csr           |                      | gen_server_crt.bat                       |
+|                    | 証明書               |                      | server.crt           | gen_server_crt.bat                       |
+| クライアント証明書 |                      |                      |                      |                                          |
+|                    | 秘密鍵               | client.key           |                      | gen_client_crt.bat                       |
+|                    | 証明書署名要求       | client.csr           |                      | gen_client_crt.bat                       |
+|                    | 証明書               |                      | client.crt           | gen_client_crt.bat                       |
+|                    | 配布用　(*1)         |                      | client.pfx           | gen_client_crt.bat                       |
+
+(*1) 「公開鍵証明書」「CA証明書」「秘密鍵」をまとめてパスワード保護したもの
+
+
+環境設定
+========================================
+
+### OpenSSL のパス
+
+デフォルトのインストールパスを `define.bat` で設定済み。
+
+```dos
+@REM  OpenSSL のパスを通す
+set PATH=%PATH%;C:\Program Files\OpenSSL-Win64\bin
+```
+
+
+個別設定
+========================================
+
+### 設定場所
+
+| 項目                 | ルート CA    | 中間 CA               | サーバ証明書                         | クライアント証明書   |
+| :------------------- | :----------- | :-------------------- | :----------------------------------- | :------------------- |
+| サブジェクト(C,ST,O) | `define.bat` | `define.bat`          | `server.cnf`                         | `define.bat`         |
+| サブジェクト(L,OU)   | -            | -                     | `server.cnf`                         | -                    |
+| サブジェクト(CN)     | `define.bat` | `define.bat`          | `server.cnf`                         | `gen_client_crt.bat` |
+| 暗号アルゴリズム     | `gen_ca.bat` | `gen_ca.bat`          | `gen_server_crt.bat`                 | `gen_client_crt.bat` |
+| 鍵長                 | `gen_ca.bat` | `gen_ca.bat`          | `gen_server_crt.bat`<br>`server.cnf` | `gen_client_crt.bat` |
+| 有効期限             | `gen_ca.bat` | `gen_ca.bat`          | `gen_server_crt.bat`                 | `gen_client_crt.bat` |
+| パスワード           | -            | -                     | -                                    | `gen_client_crt.bat` |
+| その他               | -            | `intermediate_ca.cnf` | `server.cnf`                         |                      |
+
+
+### サブジェクト
+
+| 項目名 | 意味                            | ルート CA | 中間 CA          | サーバ証明書 | クライアント証明書 |
+| :----- | :------------------------------ | :-------- | :--------------- | :----------- | :----------------- |
+| C      | Country (国名)                  | JP        | JP               | JP           | JP                 |
+| ST     | State (都道府県)                | Tokyo     | Tokyo            | Tokyo        | Tokyo              |
+| L      | Locality (市区町村)             | -         | -                | Shinjuku-Ku  | -                  |
+| O      | Organization (組織名)           | MyCompany | MyCompany        | MyCompany    | MyCompany          |
+| OU     | Organizational Unit (部署名)    | -         | -                | Section X    | -                  |
+| CN     | Common Name (コモンネーム)      | MyRootCA  | MyIntermediateCA | my-server    | (keyboard)         |
+| SAN(s) | Subject Alternative Name (別名) | -         | -                | my-server    | -                  |
+
+
+### 暗号アルゴリズム、鍵長
+
+| 項目名           | ルート CA | 中間 CA | サーバ証明書 | クライアント証明書 |
+| :--------------- | :-------- | :------ | :----------- | :----------------- |
+| 暗号アルゴリズム | RSA       | RSA     | RSA          | RSA                |
+| 鍵長             | 4096      | 4096    | 2048         | 2048               |
+
+
+### 有効期限
+
+| 項目名   | ルート CA       | 中間 CA         | サーバ証明書     | クライアント証明書 |
+| :------- | :-------------- | :-------------- | :--------------- | :----------------- |
+| 有効期限 | 7300 日（20年） | 3650 日（10年） | 825 日（27か月） | 365 日（12か月）   |
+
+
+### パスワード
+
+クライアント証明書は発行先の本人以外が使えないようにパスワードによるロックが掛けられる。
+そのパスワードはバッチファイルの実行中にキーボードで入力する。
+

@@ -1,0 +1,27 @@
+country_name                = JP
+state                       = Tokyo
+locality_name               = Shinjuku-Ku
+organization_name           = MyCompany
+organizational_unit_name    = Section X
+common_name                 = my-server
+
+[req]
+default_bits        = 2048
+default_md          = sha256
+distinguished_name  = dn
+req_extensions      = req_ext
+prompt              = no
+
+[dn]
+C   = $country_name
+ST  = $state
+L   = $locality_name
+O   = $organization_name
+OU  = $organizational_unit_name
+CN  = $common_name
+
+[req_ext]
+subjectAltName = @alt_names
+
+[alt_names]
+DNS.1 = $common_name
