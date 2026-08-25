@@ -3,7 +3,7 @@ state                       = Tokyo
 locality_name               = Shinjuku-Ku
 organization_name           = MyCompany
 organizational_unit_name    = Section X
-common_name                 = my-server
+common_name                 = my-server.local
 
 [req]
 default_bits        = 2048

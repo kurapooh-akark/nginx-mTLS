@@ -76,15 +76,15 @@ set PATH=%PATH%;C:\Program Files\OpenSSL-Win64\bin
 
 ### サブジェクト
 
-| 項目名 | 意味                            | ルート CA | 中間 CA          | サーバ証明書 | クライアント証明書 |
-| :----- | :------------------------------ | :-------- | :--------------- | :----------- | :----------------- |
-| C      | Country (国名)                  | JP        | JP               | JP           | JP                 |
-| ST     | State (都道府県)                | Tokyo     | Tokyo            | Tokyo        | Tokyo              |
-| L      | Locality (市区町村)             | -         | -                | Shinjuku-Ku  | -                  |
-| O      | Organization (組織名)           | MyCompany | MyCompany        | MyCompany    | MyCompany          |
-| OU     | Organizational Unit (部署名)    | -         | -                | Section X    | -                  |
-| CN     | Common Name (コモンネーム)      | MyRootCA  | MyIntermediateCA | my-server    | (keyboard)         |
-| SAN(s) | Subject Alternative Name (別名) | -         | -                | my-server    | -                  |
+| 項目名 | 意味                            | ルート CA | 中間 CA          | サーバ証明書    | クライアント証明書 |
+| :----- | :------------------------------ | :-------- | :--------------- | :-------------- | :----------------- |
+| C      | Country (国名)                  | JP        | JP               | JP              | JP                 |
+| ST     | State (都道府県)                | Tokyo     | Tokyo            | Tokyo           | Tokyo              |
+| L      | Locality (市区町村)             | -         | -                | Shinjuku-Ku     | -                  |
+| O      | Organization (組織名)           | MyCompany | MyCompany        | MyCompany       | MyCompany          |
+| OU     | Organizational Unit (部署名)    | -         | -                | Section X       | -                  |
+| CN     | Common Name (コモンネーム)      | MyRootCA  | MyIntermediateCA | my-server.local | (keyboard)         |
+| SAN(s) | Subject Alternative Name (別名) | -         | -                | my-server.local | -                  |
 
 
 ### 暗号アルゴリズム、鍵長
