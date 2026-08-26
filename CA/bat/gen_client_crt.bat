@@ -11,7 +11,7 @@ call %~dp0define.bat
 set client_key=%SECRET_DIR%\client.key
 set client_csr=%SECRET_DIR%\client.csr
 set client_crt=%PUBLIC_DIR%\client.crt
-set client_pfx=%PUBLIC_DIR%\client.pfx
+set client_pfx=%SECRET_DIR%\client.pfx
 
 @set /p SUBJECT_CN="CN‚ğ“ü—Í‚µ‚Ä‚­‚¾‚³‚¢F"
 set SUBJECT_CLIENT_CSR=/C=%SUBJECT_C%/O=%SUBJECT_O%/CN=%SUBJECT_CN%

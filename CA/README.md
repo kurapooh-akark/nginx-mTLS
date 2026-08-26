@@ -130,7 +130,7 @@ set PATH=%PATH%;C:\Program Files\OpenSSL-Win64\bin
 |                    | 秘密鍵               | client.key           |                      | gen_client_crt.bat                       |
 |                    | 証明書署名要求       | client.csr           |                      | gen_client_crt.bat                       |
 |                    | 証明書               |                      | client.crt           | gen_client_crt.bat                       |
-|                    | 配布用　(*1)         |                      | client.pfx           | gen_client_crt.bat                       |
+|                    | 配布用　(*1)         | client.pfx           |                      | gen_client_crt.bat                       |
 
 (*1) 「公開鍵証明書」「CA証明書」「秘密鍵」をまとめてパスワード保護したもの
 
