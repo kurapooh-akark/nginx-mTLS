@@ -1,5 +1,13 @@
 {
     "files.autoGuessEncoding": true,
+    "files.exclude": {
+        "nginx/conf": true,
+        "nginx/contrib": true,
+        "nginx/docs": true,
+        "nginx/html": true,
+        "nginx/logs": true,
+        "nginx/temp": true
+    },
     "[bat]": {
         "files.encoding": "shiftjis"
     },
