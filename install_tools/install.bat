@@ -30,4 +30,10 @@ set WINGET_OPTION=%WINGET_OPTION%  --accept-source-agreements
 winget install -e --id ShiningLight.OpenSSL.Light
 
 
+@REM  --------------------------------------------------
+@REM  vscode のインストール
+@REM  --------------------------------------------------
+winget install -e --id Microsoft.VisualStudioCode --interactive
+
+
 pause

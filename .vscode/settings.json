@@ -1,0 +1,10 @@
+{
+    "files.autoGuessEncoding": true,
+    "[bat]": {
+        "files.encoding": "shiftjis"
+    },
+    "[markdown]": {
+        "files.encoding": "utf8"
+    },
+    "editor.fontFamily": "'BIZ UDゴシック', Consolas, 'Courier New', monospace"
+}
