@@ -24,9 +24,9 @@ openssl genrsa -out %client_key% 2048
 openssl req -new -key %client_key% -out %client_csr% -subj %SUBJECT_CLIENT_CSR%
 
 @REM  中間 CA で署名してサーバ証明書を発行
-@REM      有効期限 = 365 日（12か月）
+@REM      有効期限 = 365 日（12か月） → 395 日（13か月） に変更
 @REM      （目安） ルールなし
-openssl x509 -req -days 365 -in %client_csr% -CA %intermediate_ca_crt% -CAkey %intermediate_ca_key% -CAcreateserial -out %client_crt%
+openssl x509 -req -days 395 -in %client_csr% -CA %intermediate_ca_crt% -CAkey %intermediate_ca_key% -CAcreateserial -out %client_crt%
 
 @REM  中間 CA 証明書を含めた PKCS#12 (.pfx) を作成
 @REM  （注意）パスワード入力を求められる
