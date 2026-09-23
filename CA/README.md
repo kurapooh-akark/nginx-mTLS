@@ -64,6 +64,12 @@ set PATH=%PATH%;C:\Program Files\OpenSSL-Win64\bin
 
 `bat\gen_client_crt.bat` を実行する。
 
+実行中に以下をキーボード入力する。
+
+* Common Name
+* パスワード
+* パスワード（確認）
+
 
 認証局 (CA) と証明書のインストール
 ----------------------------------------
