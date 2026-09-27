@@ -1,6 +1,9 @@
 {
     "files.autoGuessEncoding": true,
     "files.exclude": {
+        "gitea/custom": true,
+        "gitea/data": true,
+        "gitea/log": true,
         "nginx/conf": true,
         "nginx/contrib": true,
         "nginx/docs": true,
